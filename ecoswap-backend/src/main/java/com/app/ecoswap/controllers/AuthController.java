@@ -5,6 +5,8 @@ import com.app.ecoswap.exceptions.UserNotFoundException;
 import com.app.ecoswap.models.LoginForm;
 import com.app.ecoswap.models.User;
 import com.app.ecoswap.repositories.IUserRepository;
+import com.app.ecoswap.services.impl.UserServiceImp;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ public class AuthController {
     @Autowired
     private IUserRepository userRepository;
 
+    @Autowired
+    private UserServiceImp userServiceImp;
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginForm loginForm){
         User user = userRepository.findUserByEmail(loginForm.getEmail()).orElseThrow(()->new UserNotFoundException("Usuario no encontrado"));
@@ -40,8 +45,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(){
-        return "register";
+    public ResponseEntity<User> register(@Valid @RequestBody User user){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userServiceImp.createUser(user));
     }
 
 }
