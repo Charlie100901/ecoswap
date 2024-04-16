@@ -1,10 +1,12 @@
 package com.app.ecoswap.services.impl;
 
-import com.app.ecoswap.exceptions.FileFormatException;
-import com.app.ecoswap.exceptions.GlobalException;
-import com.app.ecoswap.exceptions.ProductNotFoundException;
+import com.app.ecoswap.config.SessionTokenService;
+import com.app.ecoswap.exceptions.*;
 import com.app.ecoswap.models.Product;
+import com.app.ecoswap.models.Role;
+import com.app.ecoswap.models.User;
 import com.app.ecoswap.repositories.IProductRepository;
+import com.app.ecoswap.repositories.IUserRepository;
 import com.app.ecoswap.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class ProductServiceImp implements ProductService {
@@ -28,9 +27,15 @@ public class ProductServiceImp implements ProductService {
     @Autowired
     private IProductRepository iProductRepository;
 
+    @Autowired
+    private SessionTokenService sessionTokenService;
+
+    @Autowired
+    private IUserRepository userRepository;
+
     @Override
     public List<Product> getAllProducts(){
-        return iProductRepository.findAll();
+          return iProductRepository.findAll();
     }
 
     @Override
@@ -68,7 +73,7 @@ public class ProductServiceImp implements ProductService {
             return iProductRepository.save(productRequest);
         }catch (IOException e) {
             throw new ProductNotFoundException("Error al crear el producto: " + e.getMessage());
-        } catch (Exception e){
+        }catch (Exception e){
             throw new GlobalException("Error al crear el producto: "+ e.getMessage());
         }
     }

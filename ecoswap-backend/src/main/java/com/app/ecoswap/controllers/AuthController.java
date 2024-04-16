@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/auth")
@@ -29,7 +31,9 @@ public class AuthController {
         User user = userRepository.findUserByEmail(loginForm.getEmail()).orElseThrow(()->new UserNotFoundException("Usuario no encontrado"));
         if (user != null && user.getPassword().equals(loginForm.getPassword())) {
             String sessionToken = sessionTokenService.generateSessionToken(user.getEmail());
-            return ResponseEntity.ok(sessionToken);
+            Map<String, String> response = new HashMap<>();
+            response.put("token", sessionToken);
+            return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
         }

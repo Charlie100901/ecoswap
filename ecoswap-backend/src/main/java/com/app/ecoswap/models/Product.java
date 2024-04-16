@@ -2,6 +2,8 @@ package com.app.ecoswap.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -29,7 +31,9 @@ public class Product {
     @Column(nullable = true)
     private String imageProduct;
 
-    @ManyToOne(targetEntity = User.class, cascade = CascadeType.REMOVE, optional = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private User user;
 
     @OneToMany(mappedBy = "productFrom")
@@ -40,9 +44,4 @@ public class Product {
 
 
 
-
-
-
-
-    
 }

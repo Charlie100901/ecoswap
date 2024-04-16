@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Validated
 @RestController
@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("user/{id}")
     public User getUserById(@PathVariable Long id, @RequestHeader("Authorization") String token)  {
-        return userServiceImp.getUserById(id);
+        return userServiceImp.getUserById(id, token);
     }
 
     @PostMapping("user/create")
@@ -38,14 +38,13 @@ public class UserController {
     }
 
     @PutMapping("user/{id}/update")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
-        User userUpdated = userServiceImp.updateUserById(id, user);
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user, @RequestHeader("Authorization") String token){
+        User userUpdated = userServiceImp.updateUserById(id, user, token);
         return ResponseEntity.status(HttpStatus.OK).body(userUpdated);
     }
 
     @DeleteMapping("user/{id}/delete")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id){
-        String response = userServiceImp.deleteUser(id);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Map<String, String>> deleteUser(@PathVariable Long id, @RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(userServiceImp.deleteUser(id, token));
     }
 }

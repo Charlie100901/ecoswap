@@ -19,14 +19,6 @@ public class RequestExchange {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_user_from")
-    private User userFrom;
-
-    @ManyToOne
-    @JoinColumn(name = "id_user_to")
-    private User userTo;
-
-    @ManyToOne
     @JoinColumn(name = "id_product_from")
     private Product productFrom;
 
