@@ -84,6 +84,12 @@ public class HandlerExceptionController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    @ExceptionHandler(UnauthorizedAccessException.class)
+    public ResponseEntity<Error> unauthorizedAccessException(Exception ex){
+        Error error = new Error(new Date(), HttpStatus.UNAUTHORIZED.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Error> defaultEx(Exception ex){
         Error error = new Error(new Date(), HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());

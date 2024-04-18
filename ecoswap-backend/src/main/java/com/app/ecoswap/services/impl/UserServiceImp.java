@@ -3,6 +3,7 @@ package com.app.ecoswap.services.impl;
 import com.app.ecoswap.config.SessionTokenService;
 import com.app.ecoswap.exceptions.EmailAlreadyExistsException;
 import com.app.ecoswap.exceptions.InvalidSessionTokenException;
+import com.app.ecoswap.exceptions.UnauthorizedAccessException;
 import com.app.ecoswap.exceptions.UserNotFoundException;
 import com.app.ecoswap.models.Role;
 import com.app.ecoswap.models.User;
@@ -37,11 +38,20 @@ public class UserServiceImp implements UserService {
         if(sessionTokenService.isValidSessionToken(token)){
             String emailUser = sessionTokenService.getUserEmailFromToken(token);
             User user = userRepository.findUserByEmail(emailUser).orElseThrow(()->new UserNotFoundException("Usuario no encontrado"));
-            if(user.getRoles().stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"))){
-                return (ArrayList<User>) userRepository.findAll();
-            }else{
-                return Collections.singletonList(user);
+            List<Role> roles = user.getRoles();
+            for(Role rol: roles){
+                if(rol.getName().equals("ADMIN")){
+                    return (ArrayList<User>) userRepository.findAll();
+                }else{
+                    break;
+                }
             }
+            return Collections.singletonList(user);
+//            if(user.getRoles().stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"))){
+//                return (ArrayList<User>) userRepository.findAll();
+//            }else{
+//                return Collections.singletonList(user);
+//            }
         }else{
             throw new InvalidSessionTokenException("El token es invalido");
         }
@@ -50,23 +60,34 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User getUserById(Long id, String token)  {
-        return userRepository.findById(id)
-                .orElseThrow(()->new UserNotFoundException("Usuario no existe en la base de datos"));
+        if(sessionTokenService.isValidSessionToken(token)){
+            String emailUser = sessionTokenService.getUserEmailFromToken(token);
+            User user = userRepository.findUserByEmail(emailUser).orElseThrow(()->new UserNotFoundException("Usuario no encontrado"));
+            List<Role> roles = user.getRoles();
+            for(Role rol: roles){
+                if(rol.getName().equals("ADMIN")){
+                    return userRepository.findById(id)
+                            .orElseThrow(()->new UserNotFoundException("Usuario no existe en la base de datos"));
+                }else{
+                    break;
+                }
+            }
+            return user;
+        }else{
+            throw new InvalidSessionTokenException("El token es invalido");
+        }
+        
     }
 
     @Override
     @Transactional
     public User createUser(User user){
         if (!checkEmailExists(user)) {
-            Optional<Role> optionalRoleUser = roleRepository.findByName("ROLE_USER");
+            Optional<Role> optionalRoleUser = roleRepository.findByName("USER");
             List<Role> roles = new ArrayList<>();
 
             optionalRoleUser.ifPresent(roles::add);
 
-            if(user.isAdmin()){
-                Optional<Role> optionalRoleAdmin = roleRepository.findByName("ROLE_ADMIN");
-                optionalRoleAdmin.ifPresent(roles::add);
-            }
             user.setRoles(roles);
             //Encriptar la contraseña
             user.setPassword(user.getPassword());
@@ -79,30 +100,43 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public User updateUserById(Long id, User user){
-            Optional<User> existingUserOptional = userRepository.findById(id);
-            if(existingUserOptional.isPresent()){
-                User existingUser = existingUserOptional.get();
-                existingUser.setName(user.getName());
-                existingUser.setAddress(user.getAddress());
-                existingUser.setPassword(user.getPassword());
-                existingUser.setCellphoneNumber(user.getCellphoneNumber());
-                return userRepository.save(existingUser);
+    public User updateUserById(Long id, User userRequest, String token){
+        if(sessionTokenService.isValidSessionToken(token)){
+            String emailUser = sessionTokenService.getUserEmailFromToken(token);
+            User user = userRepository.findUserByEmail(emailUser).orElseThrow(()->new UserNotFoundException("Usuario no encontrado"));
+            if(user.getId().equals(id)){
+                user.setName(userRequest.getName());
+                user.setAddress(userRequest.getAddress());
+                user.setPassword(userRequest.getPassword());
+                user.setCellphoneNumber(userRequest.getCellphoneNumber());
+                return userRepository.save(user);
             }else {
-                throw new UserNotFoundException("No se encontró un usuario");
+                throw new UnauthorizedAccessException("No tienes permiso para eliminar este perfil");
             }
+        }else{
+            throw new InvalidSessionTokenException("El token es invalido");
+        }
+
     }
 
 
     @Override
-    public String deleteUser(Long id){
-        Optional<User> userOptional = userRepository.findById(id);
-        if (userOptional.isPresent()) {
-            userRepository.deleteById(id);
-            return "Usuario eliminado exitosamente";
-        } else {
-            throw new UserNotFoundException("No se encontró un usuario con el ID especificado: " + id);
+    public Map<String, String> deleteUser(Long id, String token){
+        if (sessionTokenService.isValidSessionToken(token)){
+            String emailUser = sessionTokenService.getUserEmailFromToken(token);
+            User user = userRepository.findUserByEmail(emailUser).orElseThrow(()->new UserNotFoundException("Usuario no encontrado"));
+            if (user.getId().equals(id)) {
+                userRepository.deleteById(id);
+                Map<String, String> response = new HashMap<>();
+                response.put("message","Usuario eliminado exitosamente");
+                return response;
+            } else {
+                throw new UnauthorizedAccessException("No tienes permiso para eliminar este perfil");
+            }
+        }else {
+            throw new InvalidSessionTokenException("El token es invalido");
         }
+
     }
 
     @Override

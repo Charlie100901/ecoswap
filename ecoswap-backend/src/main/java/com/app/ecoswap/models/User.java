@@ -42,14 +42,5 @@ public class User {
     )
     private List<Role> roles;
 
-    @Transient
-    private boolean admin;
-
-    @OneToMany(mappedBy = "userFrom")
-    private List<RequestExchange> requestSent;
-
-    @OneToMany(mappedBy = "userTo")
-    private List<RequestExchange> requestReceived;
-
 
 }
