@@ -36,11 +36,7 @@ public class Product {
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private User user;
 
-    @OneToMany(mappedBy = "productFrom")
-    private List<RequestExchange> requestsFrom;
 
-    @OneToMany(mappedBy = "productTo")
-    private List<RequestExchange> requestsTo;
 
 
 

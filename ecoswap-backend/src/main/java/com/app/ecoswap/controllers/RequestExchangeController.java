@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -34,5 +35,11 @@ public class RequestExchangeController {
     public ResponseEntity<String> deleteRequestExchange(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(requestExchangeServiceImp.deleteRequestExchange(id));
     }
+
+    @PostMapping("/select-request-exchange/{id}")
+    public ResponseEntity<Map<String, String>> selectExchangeRequest(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(requestExchangeServiceImp.selectExchangeRequest(id));
+    }
+
 
 }

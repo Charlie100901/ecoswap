@@ -90,7 +90,6 @@ public class ProductServiceImp implements ProductService {
             productExisting.setDescription(productRequest.getDescription());
             productExisting.setProductStatus(productRequest.getProductStatus());
             productExisting.setConditionProduct(productRequest.getConditionProduct());
-            productExisting.setUser(productExisting.getUser());
             return iProductRepository.save(productExisting);
         }else {
             throw new ProductNotFoundException("No se encontró un producto con el ID: "+ id);

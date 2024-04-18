@@ -19,14 +19,14 @@ public class RequestExchange {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_product_from")
+    @JoinColumn(name = "id_product_from", nullable = false)
     private Product productFrom;
 
     @ManyToOne
-    @JoinColumn(name = "id_product_to")
+    @JoinColumn(name = "id_product_to", nullable = false)
     private Product productTo;
 
-    @Column
+    @Column(nullable = false)
     private String status;
 
     @Column
