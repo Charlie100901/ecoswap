@@ -17,7 +17,7 @@ public class AdminController {
 
     @GetMapping("/statistic")
     public ResponseEntity<?> getStatistic(){
-        return ResponseEntity.status(HttpStatus.OK).body(adminServiceImp.getStaticAdmin());
+        return ResponseEntity.status(HttpStatus.OK).body(adminServiceImp.getStatisticAdmin());
     }
 
 }
