@@ -20,6 +20,10 @@ public class SessionTokenService {
         return sessionToken;
     }
 
+    public void deleteSessionToken(String token){
+        sessionTokens.remove(token);
+    }
+
     public boolean isValidSessionToken(String sessionToken) {
         return sessionTokens.containsKey(sessionToken);
     }

@@ -10,10 +10,10 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,14 +27,16 @@ public class AuthController {
     private SessionTokenService sessionTokenService;
     @Autowired
     private IUserRepository userRepository;
-
     @Autowired
     private UserServiceImp userServiceImp;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginForm loginForm){
         User user = userRepository.findUserByEmail(loginForm.getEmail()).orElseThrow(()->new UserNotFoundException("Usuario no encontrado"));
-        if (user != null && user.getPassword().equals(loginForm.getPassword())) {
+
+        if (user != null && passwordEncoder.matches(loginForm.getPassword(), user.getPassword())) {
             String sessionToken = sessionTokenService.generateSessionToken(user.getEmail());
             Map<String, String> response = new HashMap<>();
             response.put("token", sessionToken);
@@ -48,5 +50,14 @@ public class AuthController {
     public ResponseEntity<User> register(@Valid @RequestBody User user){
         return ResponseEntity.status(HttpStatus.CREATED).body(userServiceImp.createUser(user));
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestHeader("Authorization")String token){
+        Map<String, String> response = new HashMap<>();
+        sessionTokenService.deleteSessionToken(token);
+        response.put("message", "Cierre de sesión exitoso");
+        return ResponseEntity.ok(response);
+    }
+
 
 }
