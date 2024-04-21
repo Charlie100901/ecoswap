@@ -28,27 +28,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Bean
-//    public UserDetailsService users(){
-//        UserDetails admin = User.builder()
-//                .username("admin@gmail.com")
-//                .password("admin")
-//                .roles("ROLE_ADMIN")
-//                .build();
-//        UserDetails user = User.builder()
-//                .username("user@gmail.com")
-//                .password("user")
-//                .roles("ROLE_USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(admin, user);
-//    }
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
-//
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http

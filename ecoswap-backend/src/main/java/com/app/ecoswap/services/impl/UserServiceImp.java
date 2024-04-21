@@ -29,8 +29,8 @@ public class UserServiceImp implements UserService {
     @Autowired
     private SessionTokenService sessionTokenService;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -46,7 +46,7 @@ public class UserServiceImp implements UserService {
                     break;
                 }
             }
-            return Collections.singletonList(user);
+            throw new UnauthorizedAccessException("No tienes acceso a este endpoint");
 //            if(user.getRoles().stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"))){
 //                return (ArrayList<User>) userRepository.findAll();
 //            }else{
@@ -90,7 +90,7 @@ public class UserServiceImp implements UserService {
 
             user.setRoles(roles);
             //Encriptar la contraseña
-            user.setPassword(user.getPassword());
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             return userRepository.save(user);
         }else{
             throw new EmailAlreadyExistsException("El email ya se encuentra en uso, por favor elija otro");
