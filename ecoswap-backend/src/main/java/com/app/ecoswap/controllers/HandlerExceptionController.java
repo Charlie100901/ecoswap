@@ -90,6 +90,12 @@ public class HandlerExceptionController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 
+    @ExceptionHandler(ProductCreationException.class)
+    public ResponseEntity<Error> productCreationException(Exception ex){
+        Error error = new Error(new Date(), HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Error> defaultEx(Exception ex){
         Error error = new Error(new Date(), HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());

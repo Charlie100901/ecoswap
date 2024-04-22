@@ -1,6 +1,6 @@
 package com.app.ecoswap.controllers;
 
-import com.app.ecoswap.services.impl.AdminServiceImp;
+import com.app.ecoswap.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     @Autowired
-    private AdminServiceImp adminServiceImp;
+    private AdminService adminService;
 
     @GetMapping("/statistic")
     public ResponseEntity<?> getStatistic(){
-        return ResponseEntity.status(HttpStatus.OK).body(adminServiceImp.getStatisticAdmin());
+        return ResponseEntity.status(HttpStatus.OK).body(adminService.getStatisticAdmin());
     }
 
 }

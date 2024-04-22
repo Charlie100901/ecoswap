@@ -5,13 +5,11 @@ import com.app.ecoswap.exceptions.UserNotFoundException;
 import com.app.ecoswap.models.LoginForm;
 import com.app.ecoswap.models.User;
 import com.app.ecoswap.repositories.IUserRepository;
-import com.app.ecoswap.services.impl.UserServiceImp;
+import com.app.ecoswap.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +26,7 @@ public class AuthController {
     @Autowired
     private IUserRepository userRepository;
     @Autowired
-    private UserServiceImp userServiceImp;
+    private UserService userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -48,7 +46,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@Valid @RequestBody User user){
-        return ResponseEntity.status(HttpStatus.CREATED).body(userServiceImp.createUser(user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user));
     }
 
     @PostMapping("/logout")
