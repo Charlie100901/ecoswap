@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 @Service
-public class UserService implements UserService {
+public class UserService  {
 
     @Autowired
     private IUserRepository userRepository;
@@ -32,7 +32,6 @@ public class UserService implements UserService {
     private PasswordEncoder passwordEncoder;
 
 
-    @Override
     public List<User> getUsers(String token){
         if(sessionTokenService.isValidSessionToken(token)){
             String emailUser = sessionTokenService.getUserEmailFromToken(token);
@@ -57,7 +56,6 @@ public class UserService implements UserService {
     }
 
 
-    @Override
     public User getUserById(Long id, String token)  {
         if(sessionTokenService.isValidSessionToken(token)){
             String emailUser = sessionTokenService.getUserEmailFromToken(token);
@@ -78,7 +76,6 @@ public class UserService implements UserService {
         
     }
 
-    @Override
     @Transactional
     public User createUser(User user){
         if (!checkEmailExists(user)) {
@@ -97,7 +94,6 @@ public class UserService implements UserService {
     }
 
 
-    @Override
     @Transactional
     public User updateUserById(Long id, User userRequest, String token){
         if(sessionTokenService.isValidSessionToken(token)){
@@ -120,7 +116,6 @@ public class UserService implements UserService {
     }
 
 
-    @Override
     public Map<String, String> deleteUser(Long id, String token) {
         if (sessionTokenService.isValidSessionToken(token)) {
             String emailUser = sessionTokenService.getUserEmailFromToken(token);
@@ -141,7 +136,6 @@ public class UserService implements UserService {
     }
 
 
-    @Override
     public boolean checkEmailExists(User request){
         Optional<User> userOptional = userRepository.findUserByEmail(request.getEmail());
         return userOptional.isPresent();
