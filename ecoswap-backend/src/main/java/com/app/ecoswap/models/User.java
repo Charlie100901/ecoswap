@@ -3,6 +3,7 @@ package com.app.ecoswap.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.List;
@@ -19,19 +20,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 60)
     @NotBlank
     private String name;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 255)
     @NotBlank
     private String email;
     @Column(nullable = false)
     @NotBlank
+    @Size(min = 6)
     private String password;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 70)
     @NotBlank
     private String address;
-    @Column(nullable = false, name = "cellphone_number")
+    @Column(nullable = false, name = "cellphone_number", length = 10)
     @NotNull
     private int cellphoneNumber;
     @ManyToMany

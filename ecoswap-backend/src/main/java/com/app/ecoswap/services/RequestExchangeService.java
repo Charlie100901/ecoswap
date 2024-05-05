@@ -58,17 +58,7 @@ public class RequestExchangeService {
 
     }
 
-    public String deleteRequestExchange(Long id, String token){
-        if (!sessionTokenService.isValidSessionToken(token)) {
-            throw new InvalidSessionTokenException("El token es inválido");
-        }
-        if(!isAdmin(token)){
-            throw new UnauthorizedAccessException("Solo los administradores pueden acceder a una solicitud de intercambio");
-        }
-        iRequestExchangeRepository.deleteById(id);
-        return "Solicitud de intercambio eliminada exitosamente";
-
-    }
+    
     @Transactional
     public Map<String, String> selectExchangeRequest(Long id, String token){
         if(!sessionTokenService.isValidSessionToken(token)){
@@ -94,6 +84,18 @@ public class RequestExchangeService {
         User user = userRepository.findUserByEmail(emailUser).orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
         return user.getRoles().stream().anyMatch(role -> role.getName().equals("ADMIN"));
     }
+
+// public String deleteRequestExchange(Long id, String token){
+    //     if (!sessionTokenService.isValidSessionToken(token)) {
+    //         throw new InvalidSessionTokenException("El token es inválido");
+    //     }
+    //     if(!isAdmin(token)){
+    //         throw new UnauthorizedAccessException("Solo los administradores pueden acceder a una solicitud de intercambio");
+    //     }
+    //     iRequestExchangeRepository.deleteById(id);
+    //     return "Solicitud de intercambio eliminada exitosamente";
+
+    // }
 
 
 //    public RequestExchange updateRequestExchange(RequestExchange requestExchange, Long id){

@@ -31,13 +31,13 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public ResponseEntity<Product> createProduct(@Valid @ModelAttribute Product product, @RequestParam("file")MultipartFile image, @RequestHeader("Authorization")String token){
+    public ResponseEntity<Product> createProduct(@Valid Product product, @RequestParam("file")MultipartFile image, @RequestHeader("Authorization")String token){
         Product productCreated = productService.createProduct(product, image, token);
         return ResponseEntity.status(HttpStatus.CREATED).body(productCreated);
     }
 
     @PutMapping("/product/{id}")
-    public ResponseEntity<Product> updateProductById(@PathVariable Long id, @RequestBody Product productRequest, @RequestParam("file")MultipartFile image, @RequestHeader("Authorization")String token) throws IOException {
+    public ResponseEntity<Product> updateProductById(@PathVariable Long id,@Valid Product productRequest, @RequestParam("file")MultipartFile image, @RequestHeader("Authorization")String token) throws IOException {
         Product productUpdated = productService.updateProductById(id, productRequest, image, token);
         return ResponseEntity.status(HttpStatus.OK).body(productUpdated);
     }

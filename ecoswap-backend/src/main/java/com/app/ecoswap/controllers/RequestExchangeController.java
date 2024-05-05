@@ -31,15 +31,15 @@ public class RequestExchangeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(requestExchangeService.createRequestExchange(requestExchange, token));
     }
 
-    @DeleteMapping("/request-exchange/{id}")
-    public ResponseEntity<String> deleteRequestExchange(@PathVariable Long id, @RequestHeader("Authorization")String token){
-        return ResponseEntity.status(HttpStatus.OK).body(requestExchangeService.deleteRequestExchange(id, token));
-    }
-
+    
     @PostMapping("/select-request-exchange/{id}")
     public ResponseEntity<Map<String, String>> selectExchangeRequest(@PathVariable Long id, @RequestHeader("Authorization")String token){
         return ResponseEntity.status(HttpStatus.OK).body(requestExchangeService.selectExchangeRequest(id, token));
     }
-
+    
+    // @DeleteMapping("/request-exchange/{id}")
+    // public ResponseEntity<String> deleteRequestExchange(@PathVariable Long id, @RequestHeader("Authorization")String token){
+    //     return ResponseEntity.status(HttpStatus.OK).body(requestExchangeService.deleteRequestExchange(id, token));
+    // }
 
 }
