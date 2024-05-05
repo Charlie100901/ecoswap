@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -79,7 +80,7 @@ public class ProductService {
             productRequest.setImageProduct(serverImagePath);
             productRequest.setUser(user);
             productRequest.setProductStatus("activo");
-
+            productRequest.setRelease_date(LocalDate.now());
             return iProductRepository.save(productRequest);
 
         } catch (IOException e) {
@@ -142,6 +143,7 @@ public class ProductService {
         productExisting.setProductStatus("activo");
         productExisting.setConditionProduct(productRequest.getConditionProduct());
         productExisting.setImageProduct(serverImagePath);
+        productExisting.setRelease_date(LocalDate.now());
 
         return iProductRepository.save(productExisting);
     }

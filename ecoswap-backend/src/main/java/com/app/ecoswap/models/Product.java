@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.List;
+import java.time.LocalDate;
 
 
 @Entity
@@ -18,18 +18,21 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 70)
     private String description;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String category;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private String productStatus;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private String conditionProduct;
-    @Column(nullable = true)
+    @Column(nullable = true, length = 255)
     private String imageProduct;
+
+    @Column(nullable = true)
+    private LocalDate release_date;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)

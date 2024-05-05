@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Getter
@@ -26,7 +25,7 @@ public class RequestExchange {
     @JoinColumn(name = "id_product_to", nullable = false)
     private Product productTo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 15)
     private String status;
 
     @Column
