@@ -25,7 +25,7 @@ public class RequestExchange {
     @JoinColumn(name = "id_product_to", nullable = false)
     private Product productTo;
 
-    @Column(nullable = false, length = 15)
+    @Column(nullable = true, length = 15)
     private String status;
 
     @Column

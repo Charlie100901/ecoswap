@@ -142,6 +142,16 @@ public class UserService  {
     }
 
 
+    public User getUserByToken(String token){
+        if (!sessionTokenService.isValidSessionToken(token)){
+            throw new InvalidSessionTokenException("token no valido");
+        }
+        String email = sessionTokenService.getUserEmailFromToken(token);
+        User user = userRepository.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException("No usuario encontrado"));
+        return user;
+    }
+
+
 
 
 
