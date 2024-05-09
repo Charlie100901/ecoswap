@@ -40,7 +40,9 @@ public class AuthController {
             response.put("token", sessionToken);
             return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Credenciales invalidas");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
 

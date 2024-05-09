@@ -47,4 +47,10 @@ public class UserController {
     public ResponseEntity<Map<String, String>> deleteUser(@PathVariable Long id, @RequestHeader("Authorization") String token){
         return ResponseEntity.ok(userService.deleteUser(id, token));
     }
+
+    @GetMapping("user/validate")
+    public ResponseEntity<User> getUserByToken(@RequestHeader("Authorization") String token){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserByToken(token));
+    }
+
 }
