@@ -12,10 +12,22 @@
 
 } */
 
-.inicioFoto {
+.imagen-producto {
+    max-height: 300px;
+}
 
+link-product {
+    transition: transform 1s;
+}
+
+.link-product:hover {
+    transform: scale(1.02);
+}
+
+.inicioFoto {
     margin-left: 59.6%;
 }
+
 
 /* .Footer {
 
@@ -26,11 +38,20 @@
 
 } */
 
-.backg{
+.backg {
     background-color: #CAF46F;
 }
+
+.zoom {
+    transition: 1.5s;
+    max-height: 80%;
+}
+
+.zoom:hover {
+    transform: scale(1.1);
+}
+
 
 /* .Rcarta{
     background-color: #E9FFD3;
 } */
-
