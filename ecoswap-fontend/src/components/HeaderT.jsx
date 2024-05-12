@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
 
 const HeaderT = () => {
@@ -9,6 +9,35 @@ const HeaderT = () => {
         return token !== null; 
     };
 
+    const isAdmin = () => {
+        const token = localStorage.getItem('token');
+        const [user, setUser] = useState();
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${token}` }
+        };
+
+        useEffect(() => {
+            const fetchUserData = async () => {
+                try {
+                    const response = await fetch('http://localhost:8080/api/v1/user/validate', requestOptions);
+    
+                    if (response.ok) {
+                        const data = await response.json();
+                        setUser(data);
+                    } else {
+                        throw new Error('Error al obtener los datos del usuario');
+                    }
+                } catch (error) {
+                    console.error('Error:', error.message);
+                }
+            };
+    
+            fetchUserData();
+        }, []);
+
+        return user?.roles.some(role => role.name === 'ADMIN');
+    };
     const logout = async () => {
         const token = localStorage.getItem('token');
         
@@ -62,7 +91,12 @@ const HeaderT = () => {
                                 </li>
                                 {isLoggedIn() && ( 
                                     <li className="nav-item bg-success rounded">
-                                        <Link to="/upload" className='nav-link btn btn-success text-white fw-bolder' aria-current="page">Publicar Producto</Link>
+                                        <Link to="/upload" className='nav-link btn btn-success text-white fw-bolder d-flex align-items-center' aria-current="page">Publicar Producto</Link>
+                                    </li>
+                                )}
+                                {isAdmin() && (
+                                    <li className="nav-item">
+                                        <Link to="/admin" className="nav-link">Panel de Administrador</Link>
                                     </li>
                                 )}
                             </ul>
