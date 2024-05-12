@@ -5,7 +5,7 @@ import { faInstagram, faYoutube, faFacebook, faTwitter } from '@fortawesome/free
 
 const Footer = () => {
     return (
-        <footer className="bg-body-tertiary text-center text-md-start mt-5" style={{ height: '13%' }}>
+        <footer className="bg-body-tertiary text-center text-md-start mt-md-5" style={{ height: 'auto' }}>
             <div className="container p-9">
                 <div className="row">
                     <div className="col-lg-6 col-md-12 mb-4 mb-md-0 mt-3">
@@ -37,7 +37,6 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-
         </footer>
     );
 }
