@@ -34,7 +34,16 @@ public class ProductService {
 
 
     public List<Product> getAllProducts(){
-          return iProductRepository.findAll();
+
+        List<Product> products =iProductRepository.findAll();
+        List<Product> productResponse = new ArrayList<>();
+        for(Product product: products){
+            if(product.getProductStatus().equals("activo")){
+                productResponse.add(product);
+            }
+            
+        }
+        return productResponse;
     }
 
 

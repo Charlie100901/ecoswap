@@ -33,8 +33,8 @@ public class RequestExchangeController {
 
     
     @PostMapping("/select-request-exchange/{id}")
-    public ResponseEntity<Map<String, String>> selectExchangeRequest(@PathVariable Long id, @RequestHeader("Authorization")String token){
-        return ResponseEntity.status(HttpStatus.OK).body(requestExchangeService.selectExchangeRequest(id, token));
+    public ResponseEntity<Map<String, String>> selectExchangeRequest(@PathVariable RequestExchange requestExchange, @RequestHeader("Authorization")String token){
+        return ResponseEntity.status(HttpStatus.OK).body(requestExchangeService.selectExchangeRequest(requestExchange, token));
     }
     
     // @DeleteMapping("/request-exchange/{id}")
