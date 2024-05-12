@@ -17,8 +17,8 @@ public class RequestExchangeController {
     private RequestExchangeService requestExchangeService;
 
     @GetMapping("/request-exchange")
-    public ResponseEntity<List<RequestExchange>> getAllRequestExchange(@RequestHeader("Authorization")String token){
-        return ResponseEntity.status(HttpStatus.OK).body(requestExchangeService.getAllRequestExchange(token));
+    public ResponseEntity<List<RequestExchange>> getAllRequestExchange(){
+        return ResponseEntity.status(HttpStatus.OK).body(requestExchangeService.getAllRequestExchange());
     }
 
     @GetMapping("/request-exchange/{id}")
@@ -32,8 +32,8 @@ public class RequestExchangeController {
     }
 
     
-    @PostMapping("/select-request-exchange/{id}")
-    public ResponseEntity<Map<String, String>> selectExchangeRequest(@PathVariable RequestExchange requestExchange, @RequestHeader("Authorization")String token){
+    @PostMapping("/select-request-exchange")
+    public ResponseEntity<Map<String, String>> selectExchangeRequest(@RequestBody RequestExchange requestExchange, @RequestHeader("Authorization")String token){
         return ResponseEntity.status(HttpStatus.OK).body(requestExchangeService.selectExchangeRequest(requestExchange, token));
     }
     

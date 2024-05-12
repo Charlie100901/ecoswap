@@ -40,7 +40,7 @@ const ProductView = () => {
                             <p>Categoría: {product.category}</p>
                             <p>Estado: {product.conditionProduct}</p>
                             <p>Fecha de Publicación: {product.releaseDate}</p>
-                            <p>Datos del Dueño del Intercambio: {product.userName}</p>
+                            <p>Datos del Dueño del Intercambio: {product.user.name}</p>
                         </div>
                     </div>
                 </div>

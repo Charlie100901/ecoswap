@@ -32,7 +32,7 @@ public class Product {
     private String imageProduct;
 
     @Column(nullable = true)
-    private LocalDate release_date;
+    private LocalDate releaseDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)

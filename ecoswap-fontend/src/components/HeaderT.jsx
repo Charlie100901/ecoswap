@@ -18,7 +18,7 @@ const HeaderT = () => {
             headers: { 'Authorization': `Bearer ${token}` }
         };
 
-        const response = await fetch('http://localhost:8080/auth/logout', requestOptions);
+        const response = await fetch('http://localhost:8080/api/auth/logout', requestOptions);
         if (response.ok) {
             localStorage.removeItem('token');
         } else {
