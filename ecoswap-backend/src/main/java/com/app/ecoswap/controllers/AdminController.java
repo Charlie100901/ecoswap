@@ -20,4 +20,9 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.OK).body(adminService.getStatisticAdmin());
     }
 
+    @GetMapping("/products")
+    public ResponseEntity<?> getAllProducts(){
+        return ResponseEntity.ok(adminService.getAllProducts());
+    }
+
 }

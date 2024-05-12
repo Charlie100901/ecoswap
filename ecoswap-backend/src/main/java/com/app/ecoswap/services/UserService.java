@@ -45,11 +45,6 @@ public class UserService  {
                 }
             }
             throw new UnauthorizedAccessException("No tienes acceso a este endpoint");
-//            if(user.getRoles().stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"))){
-//                return (ArrayList<User>) userRepository.findAll();
-//            }else{
-//                return Collections.singletonList(user);
-//            }
         }else{
             throw new InvalidSessionTokenException("El token es invalido");
         }

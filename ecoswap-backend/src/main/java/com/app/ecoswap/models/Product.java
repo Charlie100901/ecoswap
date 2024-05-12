@@ -24,9 +24,9 @@ public class Product {
     private String description;
     @Column(nullable = false, length = 20)
     private String category;
-    @Column(nullable = false, length = 10)
+    @Column(nullable = true, length = 10)
     private String productStatus;
-    @Column(nullable = false, length = 10)
+    @Column(nullable = true, length = 10)
     private String conditionProduct;
     @Column(nullable = true, length = 255)
     private String imageProduct;
