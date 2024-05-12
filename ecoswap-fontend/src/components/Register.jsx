@@ -24,7 +24,7 @@ const Register = () => {
                 body: JSON.stringify(formData)
             };
 
-            const response = await fetch('http://localhost:8080/auth/register', requestOptions);
+            const response = await fetch('http://localhost:8080/api/auth/register', requestOptions);
 
             if (response.ok) {
                 setShowModal(true);

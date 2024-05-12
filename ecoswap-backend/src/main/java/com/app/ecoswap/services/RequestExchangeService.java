@@ -30,13 +30,7 @@ public class RequestExchangeService {
     @Autowired
     private IProductRepository iProductRepository;
 
-    public List<RequestExchange> getAllRequestExchange(String token) {
-        if (!sessionTokenService.isValidSessionToken(token)) {
-            throw new InvalidSessionTokenException("El token es inválido");
-        }
-        if (isAdmin(token)) {
-            throw new UnauthorizedAccessException("Solo los administradores pueden acceder a la lista de solicitudes de intercambio");
-        }
+    public List<RequestExchange> getAllRequestExchange() {
         return iRequestExchangeRepository.findAll();
     }
 

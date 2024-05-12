@@ -36,10 +36,12 @@ const Product =  ({ producto }) => {
             const requestOptions = {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({  
-                    
+                    productFrom: producto.productFrom,
+                    productTo: producto.productTo
                 })
             };
 
@@ -47,7 +49,7 @@ const Product =  ({ producto }) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            const responseData = response.json();
+            const responseData = await response.json();
             console.log(responseData);
         } catch (error) {
             console.error('Error al seleccionar intercambio:', error);

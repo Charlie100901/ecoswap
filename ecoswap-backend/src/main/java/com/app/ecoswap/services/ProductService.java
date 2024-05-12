@@ -89,7 +89,7 @@ public class ProductService {
             productRequest.setImageProduct(serverImagePath);
             productRequest.setUser(user);
             productRequest.setProductStatus("activo");
-            productRequest.setRelease_date(LocalDate.now());
+            productRequest.setReleaseDate(LocalDate.now());
             return iProductRepository.save(productRequest);
 
         } catch (IOException e) {
@@ -152,7 +152,7 @@ public class ProductService {
         productExisting.setProductStatus("activo");
         productExisting.setConditionProduct(productRequest.getConditionProduct());
         productExisting.setImageProduct(serverImagePath);
-        productExisting.setRelease_date(LocalDate.now());
+        productExisting.setReleaseDate(LocalDate.now());
 
         return iProductRepository.save(productExisting);
     }

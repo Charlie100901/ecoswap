@@ -5,7 +5,7 @@ const ProductsTable = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/v1/products')
+        fetch('http://localhost:8080/api/v1/admin/products')
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -19,7 +19,7 @@ const ProductsTable = () => {
             .catch(error => {
                 console.error('Error:', error);
             });
-    }, []); // Asegura que la llamada a la API solo se realice una vez
+    }, []); 
 
     const handleDeleteProduct = async (productId) => {
         try {
