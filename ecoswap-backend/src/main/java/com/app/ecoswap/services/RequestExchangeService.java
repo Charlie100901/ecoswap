@@ -58,7 +58,7 @@ public class RequestExchangeService {
     }
 
     @Transactional
-    public Map<String, String> selectExchangeRequest(RequestExchange requestExchange, String token){
+    public RequestExchange selectExchangeRequest(RequestExchange requestExchange, String token){
         if(!sessionTokenService.isValidSessionToken(token)){
             throw new InvalidSessionTokenException("El token es invalido");
         }
@@ -66,7 +66,7 @@ public class RequestExchangeService {
         //Cambia el status y la fecha de la request Exchange escogida por el usuario
         requestExchange.setStatus("completada");
         requestExchange.setDate(LocalDate.now());
-        iRequestExchangeRepository.save(requestExchange);
+        
 
             
         //Buscar y cambiar el resto de las request exchange asociadas (se cambia el status a rechazada)
@@ -84,10 +84,8 @@ public class RequestExchangeService {
         updateProductStatusAfterExchange(requestExchange.getProductFrom().getId());
         updateProductStatusInAssociatedRequests(requestExchangeAsocidas);
 
-        Map<String,String> response = new HashMap<>();
-        response.put("message", "Intercambio realizado con exito");
-
-        return response;
+        
+        return iRequestExchangeRepository.save(requestExchange);
     }
 
     public boolean isAdmin(String token){

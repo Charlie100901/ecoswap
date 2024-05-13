@@ -41,7 +41,6 @@ const HeaderT = () => {
     const logout = async () => {
         const token = localStorage.getItem('token');
         
-        // Construir los datos del formulario para enviarlos en la petición POST
         const requestOptions = {
             method: 'POST',
             headers: { 'Authorization': `Bearer ${token}` }
@@ -57,7 +56,7 @@ const HeaderT = () => {
 
     return (
         <>
-            <header>
+            <header >
                 <div className="bg-success bg-gradient py-3" style={{ height: '70px' }}>
                     <div className="container">
                         <div className="text-center">

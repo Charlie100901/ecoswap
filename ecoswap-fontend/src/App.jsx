@@ -1,6 +1,8 @@
 import React from 'react';
 import {BrowserRouter , Routes, Route } from "react-router-dom";
 import './App.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from './components/Footer';
 import HeaderT from './components/HeaderT';
 import InicioContenido from './components/InicioContenido';
@@ -27,7 +29,7 @@ function App() {
         <Route path="/product/:id" element={<ConHeaderFooter><ProductView  /></ConHeaderFooter>} />
         <Route path="/register" element={<SinHeaderFooter><Register /></SinHeaderFooter>} />
         <Route path="/login" element={<SinHeaderFooter><InicioSesion /></SinHeaderFooter>} />
-        <Route path="/exchange" element={<ExchangeView />} />
+        <Route path="/exchange" element={<ConHeaderFooter><ExchangeView /></ConHeaderFooter>} />
         <Route path="/profile" element={<ConHeaderFooter><ProfileUser  /></ConHeaderFooter>} />
         <Route path="/exchange/offers" element={<ExchangeOffers />} />
         <Route path="/admin/users" element={<ConHeaderFooter><UserTable  /></ConHeaderFooter>} />

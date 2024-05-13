@@ -19,3 +19,7 @@ INSERT INTO role_user(user_id, role_id) VALUES (3,2);
 INSERT INTO role_user(user_id,  role_id) VALUES (4,2);
 
 
+INSERT INTO request_exchange(id_product_from,  id_product_to, status) VALUES (3, 1, 'pendiente');
+INSERT INTO request_exchange(id_product_from,  id_product_to, status) VALUES (4, 1, 'pendiente');
+
+

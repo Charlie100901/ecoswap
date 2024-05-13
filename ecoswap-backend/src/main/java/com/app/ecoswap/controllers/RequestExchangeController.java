@@ -33,7 +33,7 @@ public class RequestExchangeController {
 
     
     @PostMapping("/select-request-exchange")
-    public ResponseEntity<Map<String, String>> selectExchangeRequest(@RequestBody RequestExchange requestExchange, @RequestHeader("Authorization")String token){
+    public ResponseEntity<RequestExchange> selectExchangeRequest(@RequestBody RequestExchange requestExchange, @RequestHeader("Authorization")String token){
         return ResponseEntity.status(HttpStatus.OK).body(requestExchangeService.selectExchangeRequest(requestExchange, token));
     }
     

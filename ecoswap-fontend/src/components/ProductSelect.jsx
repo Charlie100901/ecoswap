@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 
 
 const Product =  ({ producto }) => {
     const { imageProduct, title, category, conditionProduct, description, productStatus, id } = producto.productFrom;
     const [user, setUser] = useState(null);
+    const [response, setResponse] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -50,7 +52,9 @@ const Product =  ({ producto }) => {
                 throw new Error('Network response was not ok');
             }
             const responseData = await response.json();
-            console.log(responseData);
+            setResponse(responseData);
+                navigate('/exchange', { state: {responseData} }); // Redirect with data
+            
         } catch (error) {
             console.error('Error al seleccionar intercambio:', error);
         }
@@ -60,23 +64,30 @@ const Product =  ({ producto }) => {
     
     return (
         <div className="row">
-            <div className="col-md-4 mb-3">
-                <div className="card shadow link-product d-flex flex-row">
-                    <img className="card-img-left imagen-producto" src={imageProduct} alt={title} />
-                    <div className="card-body">
-                        <h5 className="card-title font-bold">Nombre: {title}</h5>
-                        <p className="card-text">Categoria: {category}</p>
-                        <p className="card-text">Descripción: {description}</p>
-                        <p className="card-text">Estado: {conditionProduct}</p>
-                        {user?.id == producto.productTo.user.id && (
-                            <button className='btn btn-primary' onClick={handleSelectExchange}>Seleccionar intercambio</button>
-                        )}
+            <div className="mb-3">
+                <div className="card shadow link-product">
+                    <div className="row">
+                        <div className="col-md-4">
+                            <img className="card-img-top img-fluid h-100" src={imageProduct} alt={title} />
+                        </div>
+                        <div className="col-md-8">
+                            <div className="card-body">
+                                <h5 className="card-title font-bold">Nombre: {title}</h5>
+                                <p className="card-text">Categoria: {category}</p>
+                                <p className="card-text">Descripción: {description}</p>
+                                <p className="card-text">Estado: {conditionProduct}</p>
+                                {user?.id == producto.productTo.user.id && (
+                                    <button className='btn btn-primary' onClick={handleSelectExchange}>Seleccionar intercambio</button>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    
+        </div>
+        
+
     );
 };
 
