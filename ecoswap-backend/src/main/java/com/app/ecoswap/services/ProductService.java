@@ -52,6 +52,10 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("No existe el producto con id "+ id));
     }
 
+    public List<Product> getProductsByCategory(String category){
+        return iProductRepository.findByCategory(category);
+    }
+
 
     @Transactional
     public Product createProduct(Product productRequest, MultipartFile image, String token) {
@@ -178,6 +182,8 @@ public class ProductService {
             throw new InvalidSessionTokenException("El token es inválido");
         }
     }
+
+    
 
 
 

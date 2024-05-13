@@ -35,7 +35,7 @@ function App() {
         <Route path="/admin/users" element={<ConHeaderFooter><UserTable  /></ConHeaderFooter>} />
         <Route path="/admin/products" element={<ConHeaderFooter><ProductsTable  /></ConHeaderFooter>} />
         <Route path="/admin" element={<ConHeaderFooter><ViewAdmin  /></ConHeaderFooter>} />
-
+        <Route path='/categoria/:category' element={<ConHeaderFooter><InicioContenido /></ConHeaderFooter>}/>
       </Routes>
     </div>
   );

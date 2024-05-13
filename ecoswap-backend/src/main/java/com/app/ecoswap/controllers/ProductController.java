@@ -30,6 +30,11 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
+    @GetMapping("/products/{category}")
+    public ResponseEntity<?> getProductsByCategory(@PathVariable String category){
+        return ResponseEntity.ok(productService.getProductsByCategory(category));
+    }
+
     @PostMapping("/product")
     public ResponseEntity<Product> createProduct(@Valid Product product, @RequestParam("file")MultipartFile image, @RequestHeader("Authorization")String token){
         Product productCreated = productService.createProduct(product, image, token);
@@ -42,10 +47,13 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productUpdated);
     }
 
+    
     @DeleteMapping("/product/{id}")
     public ResponseEntity<Map<String,String>> deleteProduct(@PathVariable Long id, @RequestHeader("Authorization")String token){
         return ResponseEntity.status(HttpStatus.OK).body(productService.deleteProduct(id, token));
 
     }
+
+
 
 }
