@@ -47,6 +47,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productUpdated);
     }
 
+    
     @DeleteMapping("/product/{id}")
     public ResponseEntity<Map<String,String>> deleteProduct(@PathVariable Long id, @RequestHeader("Authorization")String token){
         return ResponseEntity.status(HttpStatus.OK).body(productService.deleteProduct(id, token));

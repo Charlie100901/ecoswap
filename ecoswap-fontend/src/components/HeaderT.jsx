@@ -54,6 +54,8 @@ const HeaderT = () => {
         }
     };
 
+    
+
     return (
         <>
             <header >
@@ -77,15 +79,17 @@ const HeaderT = () => {
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
                                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a className="dropdown-item" href="#">Tecnología</a></li>
+                                        <li><Link to="/categoria/tecnologia" className="dropdown-item">Tecnología</Link></li>
                                         <li><hr className="dropdown-divider" /></li>
-                                        <li><a className="dropdown-item" href="#">Arte</a></li>
+                                        <li><Link to="/categoria/arte" className="dropdown-item">Arte</Link></li>
                                         <li><hr className="dropdown-divider" /></li>
-                                        <li><a className="dropdown-item" href="#">Deporte</a></li>
+                                        <li><Link to="/categoria/deporte" className="dropdown-item">Deporte</Link></li>
                                         <li><hr className="dropdown-divider" /></li>
-                                        <li><a className="dropdown-item" href="#">Ropa</a></li>
+                                        <li><Link to="/categoria/ropa" className="dropdown-item">Ropa</Link></li>
                                         <li><hr className="dropdown-divider" /></li>
-                                        <li><a className="dropdown-item" href="#">Juguetes</a></li>
+                                        <li><Link to="/categoria/juguetes" className="dropdown-item">Juguetes</Link></li>
+                                        <li><hr className="dropdown-divider" /></li>
+                                        <li><Link to="/categoria/hogar" className="dropdown-item">Hogar</Link></li>
                                     </ul>
                                 </li>
                                 {isLoggedIn() && ( 
