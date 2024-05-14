@@ -1,6 +1,7 @@
 package com.app.ecoswap.controllers;
 
 import com.app.ecoswap.models.Product;
+import com.app.ecoswap.models.User;
 import com.app.ecoswap.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class ProductController {
     @GetMapping("/products/{category}")
     public ResponseEntity<?> getProductsByCategory(@PathVariable String category){
         return ResponseEntity.ok(productService.getProductsByCategory(category));
+    }
+
+    @PostMapping("/products/find/user")
+    public ResponseEntity<?> getProductsByUser(@RequestBody User user){
+        return ResponseEntity.ok(productService.getProductsByUser(user));
     }
 
     @PostMapping("/product")

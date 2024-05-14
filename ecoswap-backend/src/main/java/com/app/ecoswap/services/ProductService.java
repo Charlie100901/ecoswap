@@ -56,6 +56,10 @@ public class ProductService {
         return iProductRepository.findByCategory(category);
     }
 
+    public List<Product> getProductsByUser(User user){
+        return iProductRepository.findByUser(user);
+    }
+
 
     @Transactional
     public Product createProduct(Product productRequest, MultipartFile image, String token) {
