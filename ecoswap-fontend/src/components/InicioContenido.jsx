@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const Producto = ({ producto }) => {
   const { imageProduct, title, category, conditionProduct, description, productStatus, id } = producto;
@@ -23,7 +23,6 @@ const Producto = ({ producto }) => {
 const InicioContenido = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const location = useLocation();
   const {category} = useParams();
 
   useEffect(() => {
