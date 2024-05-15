@@ -47,14 +47,14 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productCreated);
     }
 
-    @PutMapping("/product/{id}")
+    @PutMapping("/product/{id}/update")
     public ResponseEntity<Product> updateProductById(@PathVariable Long id,@Valid Product productRequest, @RequestParam("file")MultipartFile image, @RequestHeader("Authorization")String token) throws IOException {
         Product productUpdated = productService.updateProductById(id, productRequest, image, token);
         return ResponseEntity.status(HttpStatus.OK).body(productUpdated);
     }
 
     
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/product/{id}/delete")
     public ResponseEntity<Map<String,String>> deleteProduct(@PathVariable Long id, @RequestHeader("Authorization")String token){
         return ResponseEntity.status(HttpStatus.OK).body(productService.deleteProduct(id, token));
 

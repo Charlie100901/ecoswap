@@ -5,7 +5,10 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -39,7 +42,9 @@ public class Product {
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private User user;
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "productTo", cascade = CascadeType.ALL) // Eliminación en cascada
+    private List<RequestExchange> requestExchangesTo;
 
 
 

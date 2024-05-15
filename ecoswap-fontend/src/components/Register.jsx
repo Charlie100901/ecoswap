@@ -100,23 +100,23 @@ const Register = () => {
                 </div>
             </div>
             {showModal && (
-    <div className="modal fade show" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: 'block' }}>
-        <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">¡Usuario Registrado!</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setShowModal(false)}></button>
+                <div className="modal fade show" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: 'block' }}>
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">¡Usuario Registrado!</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setShowModal(false)}></button>
+                            </div>
+                            <div className="modal-body">
+                                ¡Usuario registrado exitosamente!
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="modal-body">
-                    ¡Usuario registrado exitosamente!
-                </div>
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-)}
+            )}
 
             
 

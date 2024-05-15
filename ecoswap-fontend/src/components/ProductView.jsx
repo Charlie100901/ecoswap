@@ -6,7 +6,8 @@ import ProductSelect from './ProductSelect';
 const ProductView = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);   
-
+    const token = localStorage.getItem('token');
+     
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -45,12 +46,18 @@ const ProductView = () => {
                     </div>
                 </div>
             )}
-            <div className="row w-50">
-                <div className="col">
-                    <Link to="/upload" state={{ product: product }}
-                    className='btn btn-primary mx-auto d-block'>Ofertar Producto para Intercambio</Link>
+            {token !== null && (
+                <div className="row w-50">
+                    <div className="col">
+                        <Link
+                            to={{ pathname: "/upload", state: { product: product } }}
+                            className="btn btn-primary mx-auto d-block"
+                        >
+                            Ofertar Producto para Intercambio
+                        </Link>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className='row mt-5 border p-5 rounded'>
                 <ProductSelect productId={id} />
