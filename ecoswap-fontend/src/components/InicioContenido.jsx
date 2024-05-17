@@ -31,8 +31,8 @@ const InicioContenido = () => {
         console.log(category);
 
         const response = category
-          ? await fetch(`http://localhost:8080/api/v1/products/${category}`)
-          : await fetch('http://localhost:8080/api/v1/products');
+          ? await fetch(`http://localhost:8001/api/v1/products/${category}`)
+          : await fetch('http://localhost:8001/api/v1/products');
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
