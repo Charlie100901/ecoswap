@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; 
-
+import { Link } from 'react-router-dom';
 
 const UserTable = () => {
     const [users, setUsers] = useState([]);
@@ -54,15 +53,29 @@ const UserTable = () => {
         }
     };
 
+    const refreshUsers = () => {
+        const token = localStorage.getItem('token');
+        fetch('http://localhost:8080/api/v1/users', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setUsers(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    };
+
     return (
         <div>
             <div className='container mt-5'>
                 <h3 className='text-center mt-5 mb-5'>USUARIOS</h3>
                 <div className='d-flex justify-content-end'>
-                <Link to="/admin"><button className='mx-5 btn btn-success text-white fw-bolder'>admin View</button></Link>
-
+                    <Link to="/admin"><button className='mx-5 btn btn-success text-white fw-bolder'>admin View</button></Link>
                     <button className='btn btn-success text-white fw-bolder' onClick={() => setShowModal(true)}>Crear</button>
-
                 </div>
                 
                 <table className="table">
@@ -91,13 +104,13 @@ const UserTable = () => {
                 </table>
             </div>
             {showModal && (
-                <RegisterModal closeModal={() => setShowModal(false)} />
+                <RegisterModal closeModal={() => setShowModal(false)} refreshUsers={refreshUsers} />
             )}
         </div>
     );
 };
 
-const RegisterModal = ({ closeModal }) => {
+const RegisterModal = ({ closeModal, refreshUsers }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -116,11 +129,11 @@ const RegisterModal = ({ closeModal }) => {
                 body: JSON.stringify(formData)
             };
 
-            const response = await fetch('http://localhost:8080/auth/register', requestOptions);
+            const response = await fetch('http://localhost:8001/api/v1/user/create', requestOptions);
 
             if (response.ok) {
                 closeModal();
-                location.reload();
+                refreshUsers();
             } else {
                 console.error('Error al registrar el usuario:', response.statusText);
             }
@@ -167,6 +180,9 @@ const RegisterModal = ({ closeModal }) => {
                                 <label htmlFor="phone" className="form-label">Número de teléfono</label>
                                 <input onChange={handleChange} type="text" className="form-control" id="phone" placeholder="Número de teléfono" name='cellphoneNumber'/>
                             </div>
+                            <div className="mb-3 d-flex justify-content-center">
+                                <button type="submit" className="btn btn-success ">Guardar</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -176,4 +192,3 @@ const RegisterModal = ({ closeModal }) => {
 };
 
 export default UserTable;
-
