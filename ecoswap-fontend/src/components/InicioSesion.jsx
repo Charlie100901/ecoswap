@@ -21,7 +21,7 @@ const InicioSesion = () => {
                 body: JSON.stringify(formData)
             };
 
-            const response = await fetch('http://localhost:8080/api/auth/login', requestOptions);
+            const response = await fetch('http://localhost:8001/api/auth/login', requestOptions);
 
             if (response.ok) {
                 // Procesar la respuesta exitosa, por ejemplo, redirigir a la página de inicio

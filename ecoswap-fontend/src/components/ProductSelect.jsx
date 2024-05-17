@@ -17,7 +17,7 @@ const Product =  ({ producto }) => {
             };
 
             try {
-                const response = await fetch('http://localhost:8080/api/v1/user/validate', requestOptions);
+                const response = await fetch('http://localhost:8001/api/v1/user/validate', requestOptions);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -47,7 +47,7 @@ const Product =  ({ producto }) => {
                 })
             };
 
-            const response = await fetch('http://localhost:8080/api/v1/select-request-exchange', requestOptions );
+            const response = await fetch('http://localhost:8001/api/v1/select-request-exchange', requestOptions );
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

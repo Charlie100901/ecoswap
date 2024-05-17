@@ -10,7 +10,7 @@ const UserTable = () => {
         const token = localStorage.getItem('token');
 
         if (token) {
-            fetch('http://localhost:8080/api/v1/users', {
+            fetch('http://localhost:8001/api/v1/users', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -37,7 +37,7 @@ const UserTable = () => {
         const token = localStorage.getItem('token');
         
         try {
-            const response = await fetch(`http://localhost:8080/api/v1/user/${userId}/delete`, {
+            const response = await fetch(`http://localhost:8001/api/v1/user/${userId}/delete`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

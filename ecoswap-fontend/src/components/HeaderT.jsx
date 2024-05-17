@@ -20,7 +20,7 @@ const HeaderT = () => {
         useEffect(() => {
             const fetchUserData = async () => {
                 try {
-                    const response = await fetch('http://localhost:8080/api/v1/user/validate', requestOptions);
+                    const response = await fetch('http://localhost:8001/api/v1/user/validate', requestOptions);
     
                     if (response.ok) {
                         const data = await response.json();
@@ -46,7 +46,7 @@ const HeaderT = () => {
             headers: { 'Authorization': `Bearer ${token}` }
         };
 
-        const response = await fetch('http://localhost:8080/api/auth/logout', requestOptions);
+        const response = await fetch('http://localhost:8001/api/auth/logout', requestOptions);
         if (response.ok) {
             localStorage.removeItem('token');
         } else {

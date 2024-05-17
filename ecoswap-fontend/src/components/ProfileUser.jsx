@@ -52,7 +52,7 @@ const Producto = ({ producto }) => {
                 },
                 body: formDataToSend
             };
-            const response = await fetch(`http://localhost:8080/api/v1/product/${id}/update`, requestOptions);
+            const response = await fetch(`http://localhost:8001/api/v1/product/${id}/update`, requestOptions);
             if (response.ok) {
                 //Recibir la respuesta del backend
                 const responseData = await response.json();
@@ -75,7 +75,7 @@ const Producto = ({ producto }) => {
     const handleDeleteProduct = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:8080/api/v1/product/${id}/delete`,{
+            const response = await fetch(`http://localhost:8001/api/v1/product/${id}/delete`,{
                 method: 'DELETE',
                 headers: {'Authorization': `Bearer ${token}`}
             });

@@ -10,7 +10,7 @@ const ViewAdmin = () => {
 
     const fetchStatistics = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/v1/admin/statistic');
+            const response = await fetch('http://localhost:8001/api/v1/admin/statistic');
             if (response.ok) {
                 const data = await response.json();
                 setStatistics(data);

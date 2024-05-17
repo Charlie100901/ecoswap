@@ -42,7 +42,7 @@ const UploadProduct = () => {
                 },
                 body: formDataToSend
             };
-            const response = await fetch('http://localhost:8080/api/v1/product', requestOptions);
+            const response = await fetch('http://localhost:8001/api/v1/product', requestOptions);
             if (response.ok) {;
                 setShowModal(true);
                 setTimeout(() => {
@@ -74,7 +74,7 @@ const UploadProduct = () => {
                     },
                     body: JSON.stringify(requestData)
                 };
-                const responseExchange = await fetch("http://localhost:8080/api/v1/request-exchange/create", requestOptionsExchange);
+                const responseExchange = await fetch("http://localhost:8001/api/v1/request-exchange/create", requestOptionsExchange);
                 if(responseExchange.ok){
                     console.log("Solicitud de intercambio creada exitosamente");
                 }else{

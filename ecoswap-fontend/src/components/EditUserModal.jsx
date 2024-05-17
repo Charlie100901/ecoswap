@@ -18,7 +18,7 @@ const EditUserModal = ({ user, closeModal, updateUser }) => {
                 body: JSON.stringify(formData)
             };
 
-            const response = await fetch(`http://localhost:8080/api/v1/user/${user.id}/update`, requestOptions);
+            const response = await fetch(`http://localhost:8001/api/v1/user/${user.id}/update`, requestOptions);
 
             if (response.ok) {
                 updateUser(user.id, formData);
