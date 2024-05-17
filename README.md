@@ -23,9 +23,7 @@ Ecoswap es una plataforma en línea que facilita el intercambio y la reutilizaci
   git clone https://github.com/tu-usuario/ecoswap.git
 2. Configura la base de datos MySQL y actualiza las credenciales en el archivo `application.properties`.
 
-3. Navega a la carpeta del proyecto y ejecuta el backend:
-  cd ecoswap-backend
-  ./mvnw spring-boot:run
+3. Ejecuta el backend
 4. Navega a la carpeta del frontend y ejecuta el cliente:
   cd ecoswap-frontend
   npm install
