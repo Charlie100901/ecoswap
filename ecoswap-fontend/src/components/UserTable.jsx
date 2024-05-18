@@ -134,6 +134,7 @@ const RegisterModal = ({ closeModal, refreshUsers }) => {
             if (response.ok) {
                 closeModal();
                 refreshUsers();
+                location.reload();
             } else {
                 console.error('Error al registrar el usuario:', response.statusText);
             }

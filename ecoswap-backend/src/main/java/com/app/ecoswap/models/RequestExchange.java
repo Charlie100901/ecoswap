@@ -21,7 +21,7 @@ public class RequestExchange {
     @JoinColumn(name = "id_product_from", nullable = false)
     private Product productFrom;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_product_to", nullable = false)
     private Product productTo;
 
