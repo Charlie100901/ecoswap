@@ -98,7 +98,7 @@ const ProductSelect = ( {productId}) => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/v1/request-exchange');
+                const response = await fetch('http://localhost:8001/api/v1/request-exchange');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
