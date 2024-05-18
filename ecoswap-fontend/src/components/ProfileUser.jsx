@@ -92,6 +92,7 @@ const Producto = ({ producto }) => {
 
     return (
         <div className="col-md-4 mb-3">
+             <Link to={`/product/${id}`} className='text-decoration-none text-black'>
             <div className="card shadow-lg link-product">
                 <img className="card-img-top imagen-producto" src={imageProduct} alt={title} />
                 <div className="card-body">
@@ -111,7 +112,7 @@ const Producto = ({ producto }) => {
                         </div>
                     )}
                 </div>
-            </div>
+            </div></Link>
             {showModal && (
                 <div className="modal fade show" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: 'block' }}>
                     <div className="modal-dialog modal-dialog-centered">
@@ -197,7 +198,7 @@ const ProfileUser = () => {
         const fetchUserData = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch('http://localhost:8080/api/v1/user/validate', {
+                const response = await fetch('http://localhost:8001/api/v1/user/validate', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -232,7 +233,7 @@ const ProfileUser = () => {
                         body: JSON.stringify(userData)
                     };
     
-                    const response = await fetch('http://localhost:8080/api/v1/products/find/user', data);
+                    const response = await fetch('http://localhost:8001/api/v1/products/find/user', data);
     
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -271,7 +272,7 @@ const ProfileUser = () => {
                     
                 </div>
                 <div>
-                    <h3 className='text-center'>Productos disponibles para intercambio</h3>
+                    <h3 className='text-center'>Productos subidos para intercambio</h3>
                     <div className='row'>
                         {products && products.map((producto, index) => (
                             <Producto key={index} producto={producto} />
